@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<script>
+// Let's play Rock, Paper, Scissors!
+function genRand(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function computerPlay() {
+	let choice = "";
+	let num = genRand(1, 12);
+	if (num < 5) {
+		choice = "R";	
+	}
+	else if (num < 9) {
+		choice = "P";
+	}
+	else {
+		choice = "S";
+	}
+	return choice;
+}
+
+function playerSelection() {
+	let welcome = prompt("Welcome to the game of Rock, Paper, Scissors! Let's play!");
+	let choice = prompt("What is your choice: 'rock', 'paper', or 'scissors'?");
+	let selection = choice.slice(0,1).toUpperCase();
+	return selection;	
+}
+
+function faceOff(playersPoints, computersPoints) {
+	let choiceOfPlayer = playerSelection();
+	let choiceOfComputer = computerPlay();
+	if (choiceOfPlayer === choiceOfComputer) {
+		return;	
+	}
+	else if ( (choiceOfPlayer === "P" && choiceOfComputer === "R") ||
+		(choiceOfPlayer === "S" && choiceOfComputer === "P) ||
+		(choiceOfPlayer === "R" && choiceOfComputer === "S")) {
+		
+		++playersPoints;
+	}
+	else {
+		++computersPoints;
+	}
+}
+
+function game(pointsPlayer, pointsComputer) {
+	for (let i = 0; i < 5; ++i) {
+		faceOff(pointsPlayer, pointsComputer);
+	}
+	if (pointsPlayer > pointsComputer) {
+		console.log("You won! Your opponent has been vanquished!);
+	}
+	else if (pointsPlayer < pointsComputer) {
+		console.log("You lost to a silly computer .. oof");
+	}
+	else {
+		console.log("Looks like the game has ended in a tie!");
+	}
+	
+}
+
+</script>
+</html>
