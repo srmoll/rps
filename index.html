@@ -18,41 +18,46 @@ function computerPlay() {
 	else {
 		choice = "S";
 	}
+	console.log(`Computer chose: ${choice}`);
 	return choice;
 }
 
 function playerSelection() {
-	let welcome = prompt("Welcome to the game of Rock, Paper, Scissors! Let's play!");
+
 	let choice = prompt("What is your choice: 'rock', 'paper', or 'scissors'?");
 	let selection = choice.slice(0,1).toUpperCase();
+	console.log(`Player chose: ${selection}, or ${choice}`);
 	return selection;	
 }
 
-function faceOff(playersPoints, computersPoints) {
+function faceOff(points) {
 	let choiceOfPlayer = playerSelection();
 	let choiceOfComputer = computerPlay();
 	if (choiceOfPlayer === choiceOfComputer) {
 		return;	
 	}
 	else if ( (choiceOfPlayer === "P" && choiceOfComputer === "R") ||
-		(choiceOfPlayer === "S" && choiceOfComputer === "P) ||
+		(choiceOfPlayer === "S" && choiceOfComputer === "P") ||
 		(choiceOfPlayer === "R" && choiceOfComputer === "S")) {
 		
-		++playersPoints;
+		++points.player;
+		console.log(`Player won this round! Player has ${points.player} points!`);
+		
 	}
 	else {
-		++computersPoints;
+		++points.computer;
+		console.log(`Computer won this round! Computer has ${points.computer} points!`);
 	}
 }
 
-function game(pointsPlayer, pointsComputer) {
+function game(points) {
 	for (let i = 0; i < 5; ++i) {
-		faceOff(pointsPlayer, pointsComputer);
+		faceOff(points);
 	}
-	if (pointsPlayer > pointsComputer) {
-		console.log("You won! Your opponent has been vanquished!);
+	if (points.player > points.computer) {
+		console.log("You won! Your opponent has been vanquished!");
 	}
-	else if (pointsPlayer < pointsComputer) {
+	else if (points.player < points.computer) {
 		console.log("You lost to a silly computer .. oof");
 	}
 	else {
@@ -60,6 +65,10 @@ function game(pointsPlayer, pointsComputer) {
 	}
 	
 }
+
+var points = { computer: 0, player: 0 };
+
+game(points);
 
 </script>
 </html>
