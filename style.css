@@ -1,0 +1,38 @@
+button {
+    display: inline-block;
+    justify-items: center;
+    align-items: center;
+    margin-left: 200px;
+    margin-top: 100px;
+    border-radius: 20px;
+    color: black;
+    font-size: 60px;
+    background-color: rgb(238, 63, 121);
+}
+
+#scoreboard {
+    display: flex;
+    justify-items: center;
+    font-size: 40px;
+    margin-left: 20px;
+    background-color: seashell;
+}
+
+h1 {
+    font-size: 90px;
+    display: flex;
+    justify-content: center;
+}
+
+#players-points {
+    margin-left: 50px;
+}
+
+#computers-points {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#outcome {
+    margin-left: 50px;
+}

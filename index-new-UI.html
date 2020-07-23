@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang=en>
+<head> <link rel="stylesheet" href="style.css"></head>
+<body>
+	<h1>Rock, Paper, Scissors</h1>
+	<div id='btn-box'>
+		<button id='rock'>rock</button>
+		<button id='paper'>paper</button>
+		<button id='scissors'>scissors</button>
+	</div>
+	<div id="scoreboard">
+		<div id="players-points"></div>
+		<div id="computers-points"></div>
+		<div id="outcome"></div>
+	</div>
+
+</body>
+
+<script>
+
+// Let's play Rock, Paper, Scissors!
+
+var points = {player: 0, computer: 0};
+const outcome = document.querySelector('#outcome');
+const playerScore = document.querySelector('#players-points');
+const computerScore = document.querySelector('#computers-points');
+
+function genRand(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function computerPlay() {
+	let choice = "";
+	let num = genRand(1, 12);
+	if (num < 5) {
+		choice = "R";	
+	}
+	else if (num < 9) {
+		choice = "P";
+	}
+	else {
+		choice = "S";
+	}
+	return choice;
+
+}
+
+function displayOutcome() {
+	
+	playerScore.textContent = `Player score: ${points.player}`;
+	computerScore.textContent = `Computer score: ${points.computer}`;
+	if (points.computer > points.player) {
+		outcome.textContent = `The computer won`;
+	}
+	else if (points.computer < points.player) {
+		outcome.textContent = `YOU: the player won`;
+	}
+	else {
+		outcome.textContent = "This game has ended in a tie";
+	}
+
+}
+
+
+alert("Welcome to Rock, Paper, Scissors!");
+const buttonList = document.querySelectorAll('button');
+for (let i = 0; i < buttonList.length; ++i) {
+	buttonList[i].addEventListener('click', oneRound);
+}
+
+function oneRound(e) {
+	if (points.computer > 4 || points.player > 4) { 
+		displayOutcome();
+		points.player = 0;
+		points.computer = 0;
+	}
+	let playerChoice = e.target.id;
+	let choiceOfPlayer = playerChoice.slice(0,1).toUpperCase();
+	let choiceOfComputer = computerPlay();
+
+	if (choiceOfPlayer === choiceOfComputer) {
+		return;	
+	}
+	else if ( (choiceOfPlayer === "P" && choiceOfComputer === "R") ||
+		(choiceOfPlayer === "S" && choiceOfComputer === "P") ||
+		(choiceOfPlayer === "R" && choiceOfComputer === "S")) {
+		
+		++points.player;
+		//playerScore.textContent = `Player score: ${points.player}`;
+		//console.log(`Player won this round! Player has ${points.player} points!`);
+		
+	}
+	else {
+		++points.computer;
+		//computerScore.textContent = `Computer score: ${points.computer}`;
+		//console.log(`Computer won this round! Computer has ${points.computer} points!`);
+	}
+}
+
+</script>
+</html>
